@@ -11,6 +11,7 @@
 
 
 <h3>Requisitos Não-Funcionais</h3>
+
 - O trabalho deverá usar corretamente os conceitos de Orientação a Objetos.
 - O trabalho deverá fazer uso de composição e/ou agregação.
 - O trabalho deverá fazer uso de herança.
