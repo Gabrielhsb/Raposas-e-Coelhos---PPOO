@@ -1,10 +1,8 @@
 
 package Raposas_e_Coelhos_simulacao;
 
-//Teste
-//testeL
 
-public class Animals {
+public abstract class Animals {
 
     private int age;
     private boolean alive;
