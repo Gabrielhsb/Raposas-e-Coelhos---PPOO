@@ -1,6 +1,7 @@
 # Trabalho final de Práticas de Programação Orientada a Objetos
 
 
+
 <h3>Grupo:</h3>
 
 - Gabriel Henrique Silva Bernardo
@@ -9,7 +10,7 @@
 - Paulo Eduardo Tomaz de Biaso
 
 
-Requisitos Não-Funcionais
+<h3>Requisitos Não-Funcionais</h3>
 - O trabalho deverá usar corretamente os conceitos de Orientação a Objetos.
 - O trabalho deverá fazer uso de composição e/ou agregação.
 - O trabalho deverá fazer uso de herança.
