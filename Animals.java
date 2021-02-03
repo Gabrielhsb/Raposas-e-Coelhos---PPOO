@@ -41,8 +41,8 @@ public class Animals {
      * @param row A coordenada vertical do local.
      * @param col The horizontal coordinate of the location.
      */
-    public void setLocation(int row, int col)
-    {
+    
+    public void setLocation(int row, int col){
         this.location = new Location(row, col);
     }
 
