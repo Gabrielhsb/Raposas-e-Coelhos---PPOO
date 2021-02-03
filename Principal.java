@@ -13,7 +13,7 @@ package Raposas_e_Coelhos_simulacao;
 public class Principal{
   public static void main(String[] args){
     Simulator simulator = new Simulator();
-    //simulator.runLongSimulation();
-    //simulator.simulate(300);
+    simulator.runLongSimulation();
+    simulator.simulate(300);
   }
 }

@@ -1,7 +1,6 @@
 package Raposas_e_Coelhos_simulacao;
 
-public class Location
-{
+public class Location{
     // Row and column positions.
     private int row;
     private int col;
@@ -11,8 +10,7 @@ public class Location
      * @param row The row.
      * @param col The column.
      */
-    public Location(int row, int col)
-    {
+    public Location(int row, int col){
         this.row = row;
         this.col = col;
     }
@@ -20,8 +18,7 @@ public class Location
     /**
      * Implement content equality.
      */
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj){
         if(obj instanceof Location) {
             Location other = (Location) obj;
             return row == other.getRow() && col == other.getCol();
@@ -35,8 +32,7 @@ public class Location
      * Return a string of the form row,column
      * @return A string representation of the location.
      */
-    public String toString()
-    {
+    public String toString(){
         return row + "," + col;
     }
     
@@ -45,24 +41,16 @@ public class Location
      * the column. Except for very big grids, this should give a
      * unique hash code for each (row, col) pair.
      */
-    public int hashCode()
-    {
+    public int hashCode(){
         return (row << 16) + col;
     }
     
-    /**
-     * @return The row.
-     */
-    public int getRow()
-    {
+    public int getRow(){
         return row;
     }
     
-    /**
-     * @return The column.
-     */
-    public int getCol()
-    {
+
+    public int getCol(){
         return col;
     }
 }
