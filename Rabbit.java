@@ -1,6 +1,5 @@
 package Raposas_e_Coelhos_simulacao;
 
-
 import java.util.List;
 import java.util.Random;
 
@@ -25,7 +24,7 @@ public class Rabbit extends Animals{
         if(randomAge) {
             setAge(rand.nextInt(MAX_AGE));
         }
-    }
+    } 
     
     public void run(Field updatedField, List newRabbits){
         incrementAge();

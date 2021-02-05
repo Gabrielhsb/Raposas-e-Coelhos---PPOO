@@ -1,14 +1,14 @@
 package Raposas_e_Coelhos_simulacao;
 
 public class Location{
-    // Row and column positions.
+    //Posições de linha e coluna.
     private int row;
     private int col;
 
     /**
-     * Represent a row and column.
-     * @param row The row.
-     * @param col The column.
+     * Representa uma linha e coluna.
+     * @param row A linha.
+     * @param col A coluna.
      */
     public Location(int row, int col){
         this.row = row;
@@ -16,7 +16,7 @@ public class Location{
     }
     
     /**
-     * Implement content equality.
+     * Implementa igualdade de conteúdo.
      */
     public boolean equals(Object obj){
         if(obj instanceof Location) {
@@ -29,17 +29,17 @@ public class Location{
     }
     
     /**
-     * Return a string of the form row,column
-     * @return A string representation of the location.
+     * Retorna uma string com a linha e a coluna.
+     * @return Uma representação da string do local
      */
     public String toString(){
         return row + "," + col;
     }
     
     /**
-     * Use the top 16 bits for the row value and the bottom for
-     * the column. Except for very big grids, this should give a
-     * unique hash code for each (row, col) pair.
+     * Usa os 16bits superiores para o valor da linha e os inferiores
+     * para a coluna. Exceto para grades muito grandes, isso deve dar
+     *um codigo hash exclusivo para cada par (linha, coluna).
      */
     public int hashCode(){
         return (row << 16) + col;
@@ -52,5 +52,5 @@ public class Location{
 
     public int getCol(){
         return col;
-    }
+    } 
 }

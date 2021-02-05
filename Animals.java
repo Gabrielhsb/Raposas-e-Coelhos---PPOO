@@ -14,15 +14,15 @@ public abstract class Animals {
     }
 
     public int getAge() {
-        return age;
+        return this.age;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setAge(int age) {//A idade é mutavel? Pois ja é setado no construtor.
+        this.age = age;          //caso negativo funcão desnecessaria
     }
 
     public boolean isAlive() {
-        return alive;
+        return this.alive;
     }
 
     public void setAlive(boolean alive) {
@@ -30,22 +30,20 @@ public abstract class Animals {
     }
 
     public Location getLocation() {
-        return location;
+        return this.location;
     }
 
     public void setLocation(Location location) {
         this.location = location;
     }
-       /**
-     * Defina a localização do animal.
-     * @param row A coordenada vertical do local.
-     * @param col The horizontal coordinate of the location.
+     
+    /**
+     * Define a localização do animal.
+     * @param row A coordenada vertical do local (linha).
+     * @param col A cordenada horizontal do local (coluna).
      */
-    
     public void setLocation(int row, int col){
         this.location = new Location(row, col);
-    }
-
-
+    } 
    
 }

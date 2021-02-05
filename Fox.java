@@ -5,8 +5,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 
-public class Fox extends Animals
-{
+public class Fox extends Animals{
     // Estatisticas das raposas
     private static final int BREEDING_AGE = 10; //Idade que raposa começa procriar
     private static final int MAX_AGE = 150; // Idade maxima que a raposa vive
@@ -31,7 +30,7 @@ public class Fox extends Animals
         }
         else {
             foodLevel = RABBIT_FOOD_VALUE;
-        }
+        } 
     }
     
     /**
@@ -69,8 +68,7 @@ public class Fox extends Animals
     }
     
  
-    private void incrementHunger()
-    {
+    private void incrementHunger(){
         foodLevel--;
         if(foodLevel <= 0) {
             setAlive(false);
@@ -124,8 +122,7 @@ public class Fox extends Animals
     /**
      * Uma raposa pode procriar se atingiu a idade reprodutiva.
      */
-    private boolean canBreed()
-    {
+    private boolean canBreed(){
         return getAge() >= BREEDING_AGE;
     }
   
