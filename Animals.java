@@ -49,5 +49,6 @@ public abstract class Animals {
     public void setDead(){
         setAlive(false);
     }
-   
+    
+     abstract public void act(Field currentField, Field updatedField, List newAnimals);
 }

@@ -38,7 +38,7 @@ public class Fox extends Animals{
      * coelhos. No processo, ele pode se reproduzir, morrer de fome,
      * ou morrer de velhice.
      */
-    public void hunt(Field currentField, Field updatedField, List newFoxes){
+    public void act(Field currentField, Field updatedField, List newFoxes){
         incrementAge();
         incrementHunger();
         if(isAlive()) {

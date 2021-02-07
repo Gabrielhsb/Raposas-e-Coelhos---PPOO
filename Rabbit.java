@@ -26,7 +26,7 @@ public class Rabbit extends Animals{
         }
     } 
     
-    public void run(Field updatedField, List newRabbits){
+    public void act(Field currentField, Field updatedField, List newRabbits){
         incrementAge();
         if(isAlive()) {
             int births = breed();
@@ -53,7 +53,7 @@ public class Rabbit extends Animals{
       private void incrementAge(){
         setAge(getAge()+1);
         if(getAge() > MAX_AGE) {
-            setDead();
+           setDead();
         }
     }
     /**
