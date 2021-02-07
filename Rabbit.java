@@ -45,7 +45,7 @@ public class Rabbit extends Animals{
             }
             else {
                 // não pode se mover nem ficar - superlotação - todos os locais tomados
-                setAlive(false);
+                setDead();
             }
         }
     }
@@ -53,7 +53,7 @@ public class Rabbit extends Animals{
       private void incrementAge(){
         setAge(getAge()+1);
         if(getAge() > MAX_AGE) {
-           setAlive(false);
+            setDead();
         }
     }
     /**
@@ -78,8 +78,6 @@ public class Rabbit extends Animals{
         return getAge() >= BREEDING_AGE;
     }
     
-    public void setEaten(){
-        setAlive(false);
-    }
+
     
 }

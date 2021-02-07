@@ -71,7 +71,7 @@ public class Fox extends Animals{
     private void incrementHunger(){
         foodLevel--;
         if(foodLevel <= 0) {
-            setAlive(false);
+            setDead();
         }
     }
     
@@ -103,7 +103,7 @@ public class Fox extends Animals{
      private void incrementAge(){
         setAge(getAge()+1);
         if(getAge() > MAX_AGE) {
-           setAlive(false);
+            setDead();
         }
     }
     /**

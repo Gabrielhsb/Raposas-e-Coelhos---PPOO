@@ -45,5 +45,9 @@ public abstract class Animals {
     public void setLocation(int row, int col){
         this.location = new Location(row, col);
     } 
+
+    public void setDead(){
+        setAlive(false);
+    }
    
 }
