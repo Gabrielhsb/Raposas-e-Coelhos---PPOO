@@ -62,7 +62,7 @@ public class Fox extends Animals{
             }
             else {
                 // não pode se mover nem ficar - superlotação - todos os locais tomados
-                setAlive(false);
+                setDead();
             }
         }
     }
