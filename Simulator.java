@@ -56,8 +56,8 @@ public class Simulator
             depth = DEFAULT_DEPTH;
             width = DEFAULT_WIDTH;
         }
-        animals = new ArrayList();
-        newAnimals = new ArrayList();
+        animals = new ArrayList<Animal>();
+        newAnimals = new ArrayList<Animal>();
         field = new Field(depth, width);
         updatedField = new Field(depth, width);
 
@@ -94,15 +94,14 @@ public class Simulator
      * Repita em todo o campo atualizando o estado de cada
      * raposa e coelho.
      */
-    public void simulateOneStep()
-    {
+    public void simulateOneStep(){
         step++;
         newAnimals.clear();
         
         // deixa todos os animais agirem
 
         for(Iterator iter = animals.iterator(); iter.hasNext(); ) {
-            Animals animal = (Animals)iter.next();
+            Animal animal = (Animal)iter.next();
             if(animal.isAlive()){
                 animal.act(field, updateField, newAnimals);
                 

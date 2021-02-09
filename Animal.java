@@ -2,13 +2,13 @@
 package Raposas_e_Coelhos_simulacao;
 
 
-public abstract class Animals {
+public abstract class Animal{
 
     private int age;
     private boolean alive;
     private Location location;
 
-    public Animals(int age, boolean alive) {
+    public Animal(int age, boolean alive) {
         this.age = age;
         this.alive = alive;
     }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public class Rabbit extends Animals{
+public class Rabbit extends Animal{
     // Estatisticas dos coelhos
 
     private static final int BREEDING_AGE = 5; //Idade que coelho começa procriar

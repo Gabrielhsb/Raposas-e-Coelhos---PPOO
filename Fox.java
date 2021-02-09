@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 
-public class Fox extends Animals{
+public class Fox extends Animal{
     // Estatisticas das raposas
     private static final int BREEDING_AGE = 10; //Idade que raposa começa procriar
     private static final int MAX_AGE = 150; // Idade maxima que a raposa vive
