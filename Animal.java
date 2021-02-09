@@ -50,5 +50,9 @@ public abstract class Animal{
         setAlive(false);
     }
     
+    //Forma como cada animal vai agir
      abstract public void act(Field currentField, Field updatedField, List newAnimals);
+
+    //idade que o animal começa a procriar
+     abstract public int getBreedingAge();
 }

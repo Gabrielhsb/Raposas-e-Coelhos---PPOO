@@ -120,10 +120,10 @@ public class Fox extends Animal{
     }
 
     /**
-     * Uma raposa pode procriar se atingiu a idade reprodutiva.
+     * @return A idade que a raposa começa a procriar 
      */
-    private boolean canBreed(){
-        return getAge() >= BREEDING_AGE;
+    public int  getBreedingAge(){
+        return  BREEDING_AGE;
     }
   
 }

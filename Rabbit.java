@@ -71,11 +71,10 @@ public class Rabbit extends Animal{
     }
 
     /**
-    * Um coelho pode procriar se tiver atingido a idade reprodutiva.
-    */
-
-    private boolean canBreed(){
-        return getAge() >= BREEDING_AGE;
+     * @return A idade que o coelho começa a procriar 
+     */
+    public int  getBreedingAge(){
+        return  BREEDING_AGE;
     }
     
 
