@@ -1,40 +1,59 @@
 
 package Raposas_e_Coelhos_simulacao;
 
+import Raposas_e_Coelhos_simulacao.Field;
+import Raposas_e_Coelhos_simulacao.Location;
+import java.util.List;
 
+
+/**
+ * A superclasse utilizada para representar um animal
+ * @author Gabriel
+ */
 public abstract class Animal{
-
-    private int age;
     private boolean alive;
     private Location location;
+    protected Field field;
 
-    public Animal(int age, boolean alive) {
-        this.age = age;
-        this.alive = alive;
+    
+    /**
+     * Contrutor padrão utilizado para inicializar os atributos.
+     * @param location localização onde o animal vai aparecer
+     * @param field ?
+     */
+    public Animal(Location location, Field field) {
+        this.alive = true;
+        this.field = field;
+        setLocation(location);
     }
 
-    public int getAge() {
-        return this.age;
-    }
-
-    public void setAge(int age) {//A idade é mutavel? Pois ja é setado no construtor.
-        this.age = age;          //caso negativo funcão desnecessaria
-    }
-
+    /** 
+     * Utilizado para ver se o animal está vivo.
+     * @return retorna true ou false.
+     */
     public boolean isAlive() {
         return this.alive;
     }
 
-    public void setAlive(boolean alive) {
-        this.alive = alive;
-    }
-
+    /** 
+     * Utilizado para pegar a localização do animal.
+     * @return retorna a localição.
+     */
     public Location getLocation() {
         return this.location;
     }
-
-    public void setLocation(Location location) {
-        this.location = location;
+    
+    /**
+     * Definine uma nova localização para o animal
+     * @param newlocation nova localização
+     */
+    public void setLocation(Location newlocation) {
+        
+        if (location != null){
+            field.clear(location);
+        }
+        location = newlocation;
+        field.place(this, newlocation);
     }
      
     /**
@@ -47,12 +66,22 @@ public abstract class Animal{
     } 
 
     public void setDead(){
-        setAlive(false);
+        alive = false;
+        if(location != null){
+            field.clear(location);
+            location = null;
+            field = null;
+        }
     }
     
-    //Forma como cada animal vai agir
-     abstract public void act(Field currentField, Field updatedField, List newAnimals);
+    /**
+     * Forma como cada animal vai agir.
+     * @param newAnimales ?
+     */
+     abstract public void act(List<Animal> newAnimales);
+     
+     
+     
 
-    //idade que o animal começa a procriar
-     abstract public int getBreedingAge();
+
 }

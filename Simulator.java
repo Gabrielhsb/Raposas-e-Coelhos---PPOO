@@ -11,157 +11,111 @@ import java.awt.Color;
 
 public class Simulator
 {
-    // As variáveis ​​finais estáticas privadas representam
-    // informações de configuração para a simulação.
-    // A largura padrão da grade.
-    private static final int DEFAULT_WIDTH = 50;
+      // Constantes que representam informações de configuração para a simulação.
+     // A largura padrão da grade.
+    private static final int DEFAULT_WIDTH = 120;
     // A profundidade padrão da grade.
-    private static final int DEFAULT_DEPTH = 50;
-    // A probabilidade de uma raposa ser criada em qualquer posição da grade.
-    private static final double FOX_CREATION_PROBABILITY = 0.02;
-    //A probabilidade de um coelho ser criado em qualquer posição da grade.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
+    private static final int DEFAULT_DEPTH = 80;
 
-    // A lista de animais no campo
-    private List animals;
-    // A lista de animais recém-nascidos
-    private List newAnimals;
-    // O estado atual do campo.
-    private Field field;
-    // Um segundo campo, usado para construir o próximo estágio da simulação.
-    private Field updatedField;
     // A etapa atual da simulação.
     private int step;
-    // Uma visão gráfica da simulação
+    // O estado atual do campo.
+    private Field field;
+    // Uma visão gráfica da simulação.
     private SimulatorView view;
     
-    /**
-     * Constroi um campo de simulação com tamanho padrão.
-     */
-    public Simulator()
-    {
+    private PopulationGenerator generator;
+
+      /**
+      * Construa um campo de simulação com tamanho padrão.
+      */
+    public Simulator(){
         this(DEFAULT_DEPTH, DEFAULT_WIDTH);
     }
     
-    /**
-     * Cria um campo de simulação com o tamanho fornecido.
-     * @param depth Profundidade de campo. Deve ser maior que zero.
-     * @param width Largura do campo. Deve ser maior que zero.
-     */
+      /**
+      * Crie um campo de simulação com o tamanho determinado.
+      * @param depth Profundidade do campo. Deve ser maior que zero.
+      * @param width Largura do campo. Deve ser maior que zero.
+      */
     public Simulator(int depth, int width)
     {
         if(width <= 0 || depth <= 0) {
-            System.out.println("As dimensões devem ser maiores que zero.");
-            System.out.println("Usando valores padrao.");
+            System.out.println("The dimensions must be greater than zero.");
+            System.out.println("Using default values.");
             depth = DEFAULT_DEPTH;
             width = DEFAULT_WIDTH;
         }
-        animals = new ArrayList<Animal>();
-        newAnimals = new ArrayList<Animal>();
-        field = new Field(depth, width);
-        updatedField = new Field(depth, width);
-
-        // Cria uma visualização do estado de cada local no campo.
-        view = new SimulatorView(depth, width);
-        view.setColor(Fox.class, Color.blue);
-        view.setColor(Rabbit.class, Color.orange);
         
-        // Configura um ponto de partida válido.
+        field = new Field(depth, width);
+
+        // Crie uma visualização do estado de cada local no campo.
+        view = new SimulatorView(depth, width);
+        generator = new PopulationGenerator(field, view);
+        // Configure um ponto de partida válido.
         reset();
     }
     
-    /**
-     * Executa a simulação de seu estado atual por um período razoavelmente longo,
-     * e.g. 500 etapas.
-     */
-    public void runLongSimulation()
-    {
-        simulate(500);
+/**
+      * Execute a simulação de seu estado atual por um período razoavelmente longo(4000 etapas).
+      */
+    public void runLongSimulation(){
+        simulate(4000);
     }
     
-    /**
-     * Executa a simulação de seu estado atual para um determinado número de etapas.
-     * Pare antes de um determinado número de etapas se deixar de ser viável.
-     */
-    public void simulate(int numSteps){
+      /**
+      * Execute a simulação de seu estado atual para um determinado número de etapas.
+      * Pare antes de um determinado número de etapas se deixar de ser viável.
+      * @param numSteps O número de etapas a serem executadas.
+      */
+    public void simulate(int numSteps) {
         for(int step = 1; step <= numSteps && view.isViable(field); step++) {
             simulateOneStep();
         }
     }
     
     /**
-     * Executa a simulação de seu estado atual para uma única etapa.
-     * Repita em todo o campo atualizando o estado de cada
-     * raposa e coelho.
-     */
+      * Execute a simulação de seu estado atual para uma única etapa.
+      * Repita em todo o campo atualizando o estado de cada
+      * raposa e coelho.
+      */
     public void simulateOneStep(){
         step++;
-        newAnimals.clear();
-        
-        // deixa todos os animais agirem
-
-        for(Iterator iter = animals.iterator(); iter.hasNext(); ) {
-            Animal animal = (Animal)iter.next();
-            if(animal.isAlive()){
-                animal.act(field, updateField, newAnimals);
-                
-            }else{
-                  iter.remove();   // remove animais mortos da coleção
-                
+        // Fornece espaço para o animal recém-nascido.
+        List<Animal> newAnimales = new ArrayList<Animal>();
+        // Deixe todos os animais agirem.
+        for(Iterator<Animal> ite = generator.getAnimalsList().iterator(); ite.hasNext();)
+        {
+            Animal animal = ite.next();
+            animal.act(newAnimales);
+            if(! animal.isAlive())
+            {
+                ite.remove();
             }
         }
-        // Adiciona animais recem-nascidos a lista
-        animals.addAll(newAnimals);
         
-        // Troca o campo e updatedField no final da etapa.
-        Field temp = field;
-        field = updatedField;
-        updatedField = temp;
-        updatedField.clear();
+        generator.getAnimalsList().addAll(newAnimales);
+        
 
-        // exibi o novo campo na tela
         view.showStatus(step, field);
     }
         
     /**
-     * Redefine a simulação para uma posição inicial.
-     */
+      * Redefina a simulação para uma posição inicial.
+      */
+    
     public void reset(){
         step = 0;
-        animals.clear();
-        field.clear();
-        updatedField.clear();
-        populate(field);
+        generator.getAnimalsList().clear();
+        generator.populate();
         
-        //Mostra o estado inicial na vista.
+        // Mostra o estado inicial na visualização.
         view.showStatus(step, field);
     }
-    
-    /**
-     * Povoa o campo com raposas e coelhos.
-     */
-    private void populate(Field field)
-    {
-        Random rand = new Random();
-        field.clear();
-        for(int row = 0; row < field.getDepth(); row++) {
-            for(int col = 0; col < field.getWidth(); col++) {
-                if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    Fox fox = new Fox(true);
-                    animals.add(fox);
-                    fox.setLocation(row, col);
-                    field.place(fox, row, col);
-                }
-                else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
-                    Rabbit rabbit = new Rabbit(true);
-                    animals.add(rabbit);
-                    rabbit.setLocation(row, col);
-                    field.place(rabbit, row, col);
-                }
-                // caso contrário, deixe o local vazio.
-            }
-        }
-        Collections.shuffle(animals);
+
+        public PopulationGenerator getGenerator(){
+        return this.generator;
     }
+
 }
 

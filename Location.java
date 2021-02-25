@@ -1,7 +1,8 @@
 package Raposas_e_Coelhos_simulacao;
 
-public class Location{
-    //Posições de linha e coluna.
+public class Location
+{
+    // Posições de linha e coluna.
     private int row;
     private int col;
 
@@ -10,13 +11,14 @@ public class Location{
      * @param row A linha.
      * @param col A coluna.
      */
+    
     public Location(int row, int col){
         this.row = row;
         this.col = col;
     }
     
     /**
-     * Implementa igualdade de conteúdo.
+     * Implementar igualdade de conteúdo.
      */
     public boolean equals(Object obj){
         if(obj instanceof Location) {
@@ -29,28 +31,35 @@ public class Location{
     }
     
     /**
-     * Retorna uma string com a linha e a coluna.
-     * @return Uma representação da string do local
+     * Retorna uma string da linha, coluna do formulário
+     * @return Uma representação de string do local.
      */
     public String toString(){
         return row + "," + col;
     }
     
     /**
-     * Usa os 16bits superiores para o valor da linha e os inferiores
-     * para a coluna. Exceto para grades muito grandes, isso deve dar
-     *um codigo hash exclusivo para cada par (linha, coluna).
+     * Use os 16 bits superiores para o valor da linha e os inferiores para
+     * a coluna. Exceto para grades muito grandes, isso deve dar uma
+     * código hash exclusivo para cada par (linha, coluna).
+     * @return Um código hash para o local.
      */
+    
     public int hashCode(){
         return (row << 16) + col;
     }
     
+    /**
+     * @return A linha
+     */
     public int getRow(){
         return row;
     }
     
-
+    /**
+     * @return A coluna
+     */
     public int getCol(){
         return col;
-    } 
+    }
 }

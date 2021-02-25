@@ -1,38 +1,44 @@
 package Raposas_e_Coelhos_simulacao;
 
-import java.awt.Color;
+
+
 import java.util.HashMap;
-import java.util.Iterator;
 
-
-
+/**
+* Esta classe coleta e fornece alguns dados estatísticos sobre o estado
+ * de um campo. É flexível: criará e manterá um contador
+ * para qualquer classe de objeto encontrada no campo.
+ *
+ * @author Gabriel
+ */
 public class FieldStats{
-    // Contadores para cada tipo de entidade (fox, rabbit, etc.) na simulação.
-    private HashMap counters;
+    // Contadores para cada tipo de entidade (raposa, coelho, etc.) na simulação.
+    private HashMap<Class, Counter> counters;
     // Se os contadores estão atualizados atualmente.
     private boolean countsValid;
 
     /**
-     * Constroe um objeto de estatisticas de campo.
+     * Constroi um objeto FieldStats.
      */
-    public FieldStats(){
-        // Configura uma coleção de contadores para cada tipo de animal
-        // que encontramos.
-        counters = new HashMap();
+    public FieldStats()
+    {
+        // Set up a collection for counters for each type of animal that
+        // we might find
+        counters = new HashMap<Class, Counter>();
         countsValid = true;
     }
 
     /**
-     * @return Uma string que descreve quais animais estão no campo.
+     * Obtenha detalhes do que está em campo.
+     * @return Uma string que descreve o que está no campo.
      */
     public String getPopulationDetails(Field field){
         StringBuffer buffer = new StringBuffer();
         if(!countsValid) {
             generateCounts(field);
         }
-        Iterator keys = counters.keySet().iterator();
-        while(keys.hasNext()) {
-            Counter info = (Counter) counters.get(keys.next());
+        for(Class key : counters.keySet()) {
+            Counter info = counters.get(key);
             buffer.append(info.getName());
             buffer.append(": ");
             buffer.append(info.getCount());
@@ -42,52 +48,52 @@ public class FieldStats{
     }
     
     /**
-     * Invalida as atuais estatisticas reinicia tudo.
-     * zera os contadores.
+     Invalide o conjunto atual de estatísticas; reiniciar tudo a zero.
      */
     public void reset(){
         countsValid = false;
-        Iterator keys = counters.keySet().iterator();
-        while(keys.hasNext()) {
-            Counter cnt = (Counter) counters.get(keys.next());
-            cnt.reset();
+        for(Class key : counters.keySet()) {
+            Counter count = counters.get(key);
+            count.reset();
         }
     }
 
     /**
-     * Incrementa a contagem de uma classe de animal.
+     * Aumente a contagem para uma classe de animal.
+     * @param animalClass A classe de animal a ser incrementada.
      */
     public void incrementCount(Class animalClass){
-        Counter cnt = (Counter) counters.get(animalClass);
-        if(cnt == null) {
-            // não temos um contador para esta espécie ainda - crie um
-            cnt = new Counter(animalClass.getName());
-            counters.put(animalClass, cnt);
+        Counter count = counters.get(animalClass);
+        if(count == null) {
+            // We do not have a counter for this species yet.
+            // Create one.
+            count = new Counter(animalClass.getName());
+            counters.put(animalClass, count);
         }
-        cnt.increment();
+        count.increment();
     }
 
     /**
-     * Indica que a contagem de aniamais foi concluida.
+     * Indique que uma contagem de animais foi concluída.
      */
     public void countFinished(){
         countsValid = true;
     }
 
     /**
-     * Determina se a simulação ainda é viável.
+     * Determine se a simulação ainda é viável.
      * Ou seja, deve continuar em execução.
-     * @return true se houver mais de uma espécie viva.
+     * @return true Se houver mais de uma espécie viva.
      */
+    
     public boolean isViable(Field field){
-        // Quantas contagens são diferentes de zero.
+        // How many counts are non-zero.
         int nonZero = 0;
         if(!countsValid) {
             generateCounts(field);
         }
-        Iterator keys = counters.keySet().iterator();
-        while(keys.hasNext()) {
-            Counter info = (Counter) counters.get(keys.next());
+        for(Class key : counters.keySet()) {
+            Counter info = counters.get(key);
             if(info.getCount() > 0) {
                 nonZero++;
             }
@@ -96,10 +102,10 @@ public class FieldStats{
     }
     
     /**
-     * Gera contagens do Numero de Fox e Rabbit.
-     * Estes não sao atualizados como Fox e Rabbit.
-     * São colocados no campo, mas apenas quando um pedido
-     * é feito para a informação.
+     * Gera contagens do número de raposas e coelhos.
+     * Estes não são atualizados quando raposas e coelhos
+     * são colocados no campo, mas apenas quando é chamada.
+     * @param field O campo para o qual gerar as estatísticas.
      */
     private void generateCounts(Field field){
         reset();
@@ -114,4 +120,3 @@ public class FieldStats{
         countsValid = true;
     }
 }
-

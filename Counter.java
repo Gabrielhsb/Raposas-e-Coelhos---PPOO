@@ -1,53 +1,51 @@
 package Raposas_e_Coelhos_simulacao;
 import java.awt.Color;
 
-
-public class Counter
-{
-    // A name for this type of simulation participant
+/**
+ * Classe responsavel pela contagem 
+ * @author Gabriel
+ */
+public class Counter{
+    
+    // Um ​​nome para este tipo de participante da simulação.
     private String name;
-    // How many of this type exist in the simulation.
+    // Quantos desse tipo existem na simulação.
     private int count;
 
     /**
-     * Provide a name for one of the simulation types.
-     * @param name  A name, e.g. "Fox".
+     * Forneça um nome para um dos tipos de simulação.
+     * @param name  Um nome, por exemplo "Raposa".
      */
-    public Counter(String name)
-    {
+    public Counter(String name){
         this.name = name;
         count = 0;
     }
     
     /**
-     * @return The short description of this type.
+     * @return retorna o nome 
      */
-    public String getName()
-    {
+    public String getName(){
         return name;
     }
 
     /**
-     * @return The current count for this type.
+     * @return A contagem atual para este tipo.
      */
-    public int getCount()
-    {
+    public int getCount(){
         return count;
     }
 
     /**
-     * Increment the current count by one.
+     * Aumente a contagem atual em um.
      */
-    public void increment()
-    {
+    public void increment(){
         count++;
     }
     
     /**
-     * Reset the current count to zero.
+     * Redefina a contagem atual para zero.
      */
-    public void reset()
-    {
+    public void reset(){
         count = 0;
     }
 }
