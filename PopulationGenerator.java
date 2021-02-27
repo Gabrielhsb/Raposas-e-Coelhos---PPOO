@@ -13,7 +13,8 @@ public class PopulationGenerator{
     // A probabilidade de uma raposa ser criada em qualquer posição da grade.
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // A probabilidade de um coelho ser criado em qualquer posição da grade.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
+    private static final double RABBIT_CREATION_PROBABILITY = 0.08;  
+    private static final double OWL_CREATION_PROBABILITY = 0.04;    
 
     // Listas de animais no campo. Listas separadas são mantidas para facilitar a iteração.
     private List<Animal> animales;
@@ -70,8 +71,7 @@ public class PopulationGenerator{
             {
                 Object obj = getField().getObjectAt(y,x);
                 
-             if(obj instanceof Rabbit || obj instanceof Fox) 
-             {
+             if(obj instanceof Rabbit || obj instanceof Fox || obj instanceof Owl) {
                  allAnimals.add(obj);
              }
   
@@ -110,6 +110,10 @@ public class PopulationGenerator{
                     Location location = new Location(row, col);
                     Rabbit rabbit = new Rabbit(true, getField(), location);
                     animales.add(rabbit);
+                }else if (rand.nextDouble() <= OWL_CREATION_PROBABILITY) {
+                     Location location = new Location(row, col);
+                     Owl owl = new Owl(true, getField(), location);
+                     animales.add(owl);
                 }
                 // senão deixe o local vazio.
             }
@@ -124,6 +128,7 @@ public class PopulationGenerator{
         private void setColor(){
         this.view.setColor(Rabbit.class, Color.ORANGE);
         this.view.setColor(Fox.class, Color.BLUE);
+        this.view.setColor(Owl.class, Color.RED);
         
     }
     

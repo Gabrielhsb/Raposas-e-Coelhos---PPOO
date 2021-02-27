@@ -90,18 +90,22 @@ public class Fox extends Animal{
              while(it.hasNext()) {
                  Location where = it.next();
                  Object animal = field.getObjectAt(where);
-                 if(animal instanceof Rabbit) 
-                 {
+                 if(animal instanceof Rabbit) {
                      Rabbit rabbit = (Rabbit) animal;
-                     if(rabbit.isAlive()) 
-                     { 
+                     if(rabbit.isAlive()) { 
                          rabbit.setDead();
                          foodLevel = RABBIT_FOOD_VALUE;
                          result = where;
                      }
+                 }else if(animal instanceof Owl){
+                     Owl owl = (Owl) animal;
+                     if(owl.isAlive()){
+                         owl.setDead();
+                         foodLevel = RABBIT_FOOD_VALUE;
+                         result = where;
+                     }
                  }
-                 else
-                 {
+                 else {
                      result = null;
                  }
              }

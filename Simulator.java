@@ -48,7 +48,6 @@ public class Simulator
         }
         
         field = new Field(depth, width);
-
         // Crie uma visualização do estado de cada local no campo.
         view = new SimulatorView(depth, width);
         generator = new PopulationGenerator(field, view);

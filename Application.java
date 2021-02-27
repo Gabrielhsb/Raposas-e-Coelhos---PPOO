@@ -23,8 +23,8 @@ private Simulator simulator;
     
     private void test()
     {
-        //simulator.simulate(6);
-        simulator.runLongSimulation();
+        simulator.simulate(6);
+        //simulator.runLongSimulation();
 //        simulator.simulateOneStep();
 //        simulator.simulateOneStep();
 //        simulator.simulateOneStep();
