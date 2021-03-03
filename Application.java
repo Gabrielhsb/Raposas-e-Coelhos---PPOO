@@ -15,16 +15,16 @@ private Simulator simulator;
     
     public Application()
     {
-        simulator = new Simulator();
-        simulator.reset();
-        test();
+        //simulator = new Simulator(1000,1000);
+        //simulator.reset();
+        //test();
         
     }
     
     private void test()
     {
-        //simulator.simulate(4);
-        simulator.runLongSimulation();
+        simulator.simulate(4);
+      //simulator.runLongSimulation();
        
 //        simulator.simulateOneStep();
 //        simulator.simulateOneStep();
@@ -36,9 +36,10 @@ private Simulator simulator;
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args)
-    {
-        Application app = new Application();
+    public static void main(String[] args){
+        
+        Menu m = new Menu();
+        m.show();
     }
     
 }

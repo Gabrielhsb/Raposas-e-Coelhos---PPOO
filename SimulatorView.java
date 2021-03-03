@@ -15,12 +15,11 @@ public class SimulatorView extends JFrame{
 
     // Cor usada para objetos que não têm cor definida.
     private static final Color UNKNOWN_COLOR = Color.gray;
-
     private final String STEP_PREFIX = "Step: ";
     private final String POPULATION_PREFIX = "Population: ";
     private JLabel stepLabel, population;
     private FieldView fieldView;
-    private JButton nextStep;
+   
     // Um mapa para armazenar cores para os participantes da simulação
     private Map<Class, Color> colors;
     // Um objeto de estatística computando e armazenando informações de simulação
@@ -32,13 +31,14 @@ public class SimulatorView extends JFrame{
       * @param width A largura da simulação.
       */
     public SimulatorView(int height, int width){
+
         stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
 
         setTitle("Fox and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
-        nextStep = new JButton("NextStep");
+
         setLocation(100, 50);
         
         fieldView = new FieldView(height, width);
@@ -47,19 +47,11 @@ public class SimulatorView extends JFrame{
         contents.add(stepLabel, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.WEST);
         contents.add(population, BorderLayout.SOUTH);
-        contents.add(nextStep,FlowLayout.LEFT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
         
-        nextStep.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                Simulator simulator = new Simulator();
-                simulator.reset();
-                simulator.simulateOneStep();
-            }
-        });
+  
     }
     
   /**

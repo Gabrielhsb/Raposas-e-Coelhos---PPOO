@@ -5,7 +5,7 @@ public class Location
     // Posições de linha e coluna.
     private int row;
     private int col;
-    
+    private boolean burned = false;
 
     /**
      * Representa uma linha e coluna.
@@ -64,7 +64,12 @@ public class Location
         return col;
     }
 
-    
-    
-    
+    public boolean isBurned() {
+        return burned;
+    }
+
+    public void setBurned() {
+        this.burned = true;
+    }
+
 }

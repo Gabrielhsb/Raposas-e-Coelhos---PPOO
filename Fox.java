@@ -6,20 +6,20 @@ import java.util.Random;
 
 
 /**
- * Subclasse de animal representa uma raposa.
+ * Subclasse de actor representa uma raposa.
  * @author Gabriel
  */
 public class Fox extends Actor{
-    
     // Estatisticas das raposas
-    private static final int BREEDING_AGE = 10; //Idade que raposa começa procriar
+    private static final int BREEDING_AGE = 7; //Idade que raposa começa procriar
     private static final int MAX_AGE = 150; // Idade maxima que a raposa vive
-    private static final double BREEDING_PROBABILITY = 0.09; // Probabilidade da raposa procriar
-    private static final int MAX_LITTER_SIZE = 3; // Numero maximo de filhotes
-    private static final int RABBIT_FOOD_VALUE = 4; //Numero de passos que a raposa pode dar antes de se alimentar novamente
+    private static final double BREEDING_PROBABILITY = 0.30; // Probabilidade da raposa procriar
+    private static final int MAX_LITTER_SIZE = 2; // Numero maximo de filhotes
+    private static final int FOOD_VALUE = 20; //Numero de passos que a raposa pode dar antes de se alimentar novamente
     private static final Random rand = new Random(); // Gerador de numeros aleatorios compartilhados para controlar a repodução
     private int foodLevel; // Nivel de comida da raposa, aumenta ao comer coelhos
     private int age;
+    private boolean bane = false;
     
     /**
      * Ao criar uma raposa ela pode nascer com idade zero ou com uma idade aleatoria.
@@ -30,12 +30,8 @@ public class Fox extends Actor{
        age = 0;
        if(randomAge) {
             age = rand.nextInt(MAX_AGE);
-            foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
+            foodLevel = rand.nextInt(FOOD_VALUE);
         }
-        else {
-            age = 0;
-            foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
-        } 
     }
     
     /**
@@ -54,11 +50,16 @@ public class Fox extends Actor{
             // Mova-se em direção a uma fonte de alimento, se encontrada.
             Location newLocation = findFood();
             if(newLocation == null) { 
-                // Nenhum alimento foi encontrado - tente ir para um local livre.
+                if(bane){
+                    setDead();
+                }else{
+                   // Nenhum alimento foi encontrado - tente ir para um local livre.
                 newLocation = field.freeAdjacentLocation(getLocation());
+                }
             }
             // Ve se da para se mexer
             if(newLocation != null) {
+                
                 setLocation(newLocation);
             }
             else {
@@ -88,20 +89,28 @@ public class Fox extends Actor{
              Location result = null;
              while(it.hasNext()) {
                  Location where = it.next();
-                 Object animal = field.getObjectAt(where);
-                 if(animal instanceof Rabbit) {
-                     Rabbit rabbit = (Rabbit) animal;
+                 Object actor = field.getObjectAt(where);
+                 if(actor instanceof Rabbit) {
+                     Rabbit rabbit = (Rabbit) actor;
                      if(rabbit.isActive()) { 
                          rabbit.setDead();
-                         foodLevel = RABBIT_FOOD_VALUE;
+                         foodLevel = FOOD_VALUE;
                          result = where;
                      }
-                 }else if(animal instanceof Owl){
-                     Owl owl = (Owl) animal;
+                 }else if(actor instanceof Owl){
+                     Owl owl = (Owl) actor;
                      if(owl.isActive()){
                          owl.setDead();
-                         foodLevel = RABBIT_FOOD_VALUE;
+                         foodLevel = FOOD_VALUE;
                          result = where;
+                     }
+                 }else if(actor instanceof FoxBane){
+                     FoxBane fb = (FoxBane) actor;
+                     if(fb.isActive()){
+                         fb.setDead();
+                         result = null;
+                         bane = true;
+                         
                      }
                  }
                  else {
@@ -155,4 +164,5 @@ public class Fox extends Actor{
         return age >= BREEDING_AGE;
     }
   
+
 }

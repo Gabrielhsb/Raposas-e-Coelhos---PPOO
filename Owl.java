@@ -12,11 +12,11 @@ import java.util.Random;
 public class Owl extends Actor{
     
     
-    private static final int BREEDING_AGE = 7; //I dade que coruja começa procriar.
+    private static final int BREEDING_AGE = 10; //I dade que coruja começa procriar.
     private static final int MAX_AGE = 200; // Idade maxima que a coruja vive.
-    private static final double BREEDING_PROBABILITY = 0.8; // Probabilidade da coruja procriar.
-    private static final int MAX_LITTER_SIZE = 10; // Numero maximo de filhotes.
-    private static final int RABBIT_FOOD_VALUE = 3; //Numero de passos que a coruja pode dar antes de se alimentar novamente.
+    private static final double BREEDING_PROBABILITY = 0.30; // Probabilidade da coruja procriar.
+    private static final int MAX_LITTER_SIZE = 3; // Numero maximo de filhotes.
+    private static final int RABBIT_FOOD_VALUE = 15; //Numero de passos que a coruja pode dar antes de se alimentar novamente.
     private static final Random rand = new Random(); // Gerador de numeros aleatorios compartilhados para controlar a repodução
     private int foodLevel; // Nivel de comida do coelho, aumenta ao comer coelhos.
     private int age;

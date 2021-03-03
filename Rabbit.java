@@ -1,5 +1,6 @@
 package Raposas_e_Coelhos_simulacao;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -11,10 +12,12 @@ import java.util.Random;
 public class Rabbit extends Actor{
 
     private static final int BREEDING_AGE = 5; //Idade que coelho começa procriar
-    private static final int MAX_AGE = 50;// Idade maxima que a coelho vive
-    private static final double BREEDING_PROBABILITY = 0.15;// Probabilidade do coelho procriar
-    private static final int MAX_LITTER_SIZE = 5;// Numero maximo de filhotes
+    private static final int MAX_AGE = 300;// Idade maxima que a coelho vive
+    private static final double BREEDING_PROBABILITY = 0.50;// Probabilidade do coelho procriar
+    private static final int MAX_LITTER_SIZE = 4;// Numero maximo de filhotes
+    private static final int FOOD_VALUE = 50; //Passo que o coelho pode dar até ter que comer novamente.
     private static final Random rand = new Random();// Gerador de numeros aleatorios compartilhados para controlar a repodução
+    private int foodLevel;
     private int age;
     
     
@@ -27,6 +30,7 @@ public class Rabbit extends Actor{
         age = 0;
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
+             foodLevel = rand.nextInt(FOOD_VALUE);
         }
     } 
     /** 
@@ -37,12 +41,15 @@ public class Rabbit extends Actor{
      */
     public void act(List<Actor> newRabbits){
         incrementAge();
+        incrementHunger();
         if(isActive()) {
             giveBirth(newRabbits);            
             // Mova-se em direção a uma fonte de alimento, se encontrada.
-            Location newLocation = field.freeAdjacentLocation(getLocation());
+            Location newLocation = findFood();
             if(newLocation != null) {
                 setLocation(newLocation);
+            }else if(newLocation == null){
+                newLocation = field.freeAdjacentLocation(getLocation());
             }
             else {
                 // Superlotação.
@@ -50,6 +57,30 @@ public class Rabbit extends Actor{
             }
         }
     }
+    private Location findFood(){
+            List<Location> adjacent = field.adjacentLocations(getLocation());
+             Iterator<Location> it = adjacent.iterator();
+             Location result = null;
+             while(it.hasNext()) {
+                 Location where = it.next();
+                 Object actor = field.getObjectAt(where);
+                 if(actor instanceof FoxBane){
+                     FoxBane fb = (FoxBane) actor;
+                     if(fb.isActive()){
+                         fb.setDead();
+                         result = null;
+                        foodLevel = FOOD_VALUE;
+                         
+                     }
+                 }
+                 else {
+                     result = null;
+                 }
+             }
+             return result;
+    }
+    
+    
     /**
      * Aumenta a idade da coelho, se chegar na idade maxima ela morre de velhice.
      */
@@ -92,5 +123,12 @@ public class Rabbit extends Actor{
     private boolean canBreed(){
         return age >= BREEDING_AGE;
     }
-    
+
+    private void incrementHunger() {
+        foodLevel--;
+        if(foodLevel <= 0) {
+            setDead();
+        }    
+    }
+
 }

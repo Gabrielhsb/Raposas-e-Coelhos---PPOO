@@ -11,11 +11,12 @@ import java.util.Random;
 public class PopulationGenerator{
     
     // A probabilidade de uma raposa ser criada em qualquer posição da grade.
-    private static final double FOX_CREATION_PROBABILITY = 0.03;
+    private static final double FOX_CREATION_PROBABILITY = 0.07;
     // A probabilidade de um coelho ser criado em qualquer posição da grade.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;  
-    private static final double OWL_CREATION_PROBABILITY = 0.04;    
+    private static final double RABBIT_CREATION_PROBABILITY = 0.3;  
+    private static final double OWL_CREATION_PROBABILITY = 0.08;    
     private static final double BURN_CREATION_PROBABILITY = 0.02;    
+    private static final double FOXBANE_CREATION_PROBABILITY = 0.2;    
 
     // Listas de animais no campo. Listas separadas são mantidas para facilitar a iteração.
     private List<Actor> actors;
@@ -119,6 +120,10 @@ public class PopulationGenerator{
                      Location location = new Location(row, col);
                      Burn burn = new Burn(getField(), location);
                      actors.add(burn);
+                }else if (rand.nextDouble() <= FOXBANE_CREATION_PROBABILITY) {
+                     Location location = new Location(row, col);
+                     FoxBane fb = new FoxBane(true,getField(), location);
+                     actors.add(fb);
                 }
                 // senão deixe o local vazio.
             }
@@ -136,6 +141,7 @@ public class PopulationGenerator{
         this.view.setColor(Fox.class, Color.BLUE);
         this.view.setColor(Owl.class, Color.DARK_GRAY);
          this.view.setColor(Burn.class, Color.RED);
+         this.view.setColor(FoxBane.class, Color.GREEN);
 
         
         

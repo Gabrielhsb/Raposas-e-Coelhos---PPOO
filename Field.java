@@ -122,6 +122,21 @@ public class Field
         }
         return free;
     }
+    
+   public List<Location> getFreeAndNotBurned(Location location){
+        List<Location> free = new LinkedList<Location>();
+        List<Location> adjacent = adjacentLocations(location);
+        for(Location next : adjacent) {
+        
+            if(!next.isBurned()) {
+                
+                if(getObjectAt(next) == null){
+                     free.add(next);
+                }
+            }
+        }
+        return free;
+    }
 
     public Location freeAdjacentLocation(Location location){
         List<Location> free = getFreeAdjacentLocations(location);

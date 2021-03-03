@@ -15,30 +15,29 @@ import java.util.Random;
  */
 public class Burn extends Actor{
         private int lifeTime;
-        private static final int MAX_TIME = 2; //Tempo maximo que dura a queimada
+        private static final int MAX_TIME = 100; //Tempo maximo que dura a queimada
         private static final Random rand = new Random(); // Gerador de numeros aleatorios.
 
         
     public Burn(Field field,Location location) {
         super(location, field);
-        this.lifeTime = rand.nextInt(MAX_TIME);
+        location.setBurned();
+        this.lifeTime =0;
     }
     
     @Override
     public void act(List<Actor> newBurn) {
         incrementTime();
         if(isActive()){
-            System.out.println("ENTREI1");
+            
             Location newLocation = findLives(); 
-           
             //O fogo so propaga se queimar algo, animal ou planta
             if(newLocation != null){
                 Burn burn = new Burn(field, newLocation);
-                        newBurn.add(burn);
-            }else {
-                //Se não ele apaga
-                setDead();
-               
+                newBurn.add(burn);
+
+            }else if(newLocation == null){
+                newLocation = field.freeAdjacentLocation(getLocation());
             }
         }
     }
@@ -48,7 +47,6 @@ public class Burn extends Actor{
             lifeTime++;
             if(lifeTime > MAX_TIME) {
                 setDead();
-                
             }
     }
  
@@ -76,11 +74,20 @@ public class Burn extends Actor{
                                fox.setDead();
                                result = where;
                            }
+                        }else if(life instanceof FoxBane){
+                           FoxBane fb = (FoxBane) life;
+                           if(fb.isActive()){
+                               fb.setDead();
+                               result = where;
+                           }
+                        
                         }else {
                             result = null;
                         }
-                 }
+                 
         }
-        return result;
+       
+    }
+         return result;
     }
 }
