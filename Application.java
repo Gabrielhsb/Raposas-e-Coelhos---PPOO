@@ -23,9 +23,9 @@ private Simulator simulator;
     
     private void test()
     {
-        simulator.simulate(6);
-        //simulator.runLongSimulation();
-//        simulator.simulateOneStep();
+        //simulator.simulate(4);
+        simulator.runLongSimulation();
+       
 //        simulator.simulateOneStep();
 //        simulator.simulateOneStep();
 //        simulator.simulateOneStep();

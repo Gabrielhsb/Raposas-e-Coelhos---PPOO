@@ -9,7 +9,7 @@ import java.util.Random;
  * Subclasse de animal representa uma raposa.
  * @author Gabriel
  */
-public class Fox extends Animal{
+public class Fox extends Actor{
     
     // Estatisticas das raposas
     private static final int BREEDING_AGE = 10; //Idade que raposa começa procriar
@@ -46,10 +46,10 @@ public class Fox extends Animal{
      * @param newFoxes lista de raposas
      */
     
-    public void act(List<Animal> newFoxes){
+    public void act(List<Actor> newFoxes){
         incrementAge();
         incrementHunger();
-        if(isAlive()) {
+        if(isActive()) {
             giveBirth(newFoxes);            
             // Mova-se em direção a uma fonte de alimento, se encontrada.
             Location newLocation = findFood();
@@ -86,20 +86,19 @@ public class Fox extends Animal{
             List<Location> adjacent = field.adjacentLocations(getLocation());
              Iterator<Location> it = adjacent.iterator();
              Location result = null;
-
              while(it.hasNext()) {
                  Location where = it.next();
                  Object animal = field.getObjectAt(where);
                  if(animal instanceof Rabbit) {
                      Rabbit rabbit = (Rabbit) animal;
-                     if(rabbit.isAlive()) { 
+                     if(rabbit.isActive()) { 
                          rabbit.setDead();
                          foodLevel = RABBIT_FOOD_VALUE;
                          result = where;
                      }
                  }else if(animal instanceof Owl){
                      Owl owl = (Owl) animal;
-                     if(owl.isAlive()){
+                     if(owl.isActive()){
                          owl.setDead();
                          foodLevel = RABBIT_FOOD_VALUE;
                          result = where;
@@ -137,7 +136,7 @@ public class Fox extends Animal{
      * Responsavel pela geração de novas raposas
      * @param newFoxes lista de raposas 
      */
-    private void giveBirth(List<Animal> newFoxes) {
+    private void giveBirth(List<Actor> newFoxes) {
          // Novas raposas nascem em locais adjacentes.
         // Obtenha uma lista de locais livres adjacentes.
         List<Location> free = field.getFreeAdjacentLocations(getLocation());

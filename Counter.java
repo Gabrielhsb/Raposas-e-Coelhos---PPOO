@@ -2,7 +2,7 @@ package Raposas_e_Coelhos_simulacao;
 import java.awt.Color;
 
 /**
- * Classe responsavel pela contagem 
+ * Classe responsavel pela contagem dos animais na simulação
  * @author Gabriel
  */
 public class Counter{

@@ -80,20 +80,20 @@ public class Simulator
       */
     public void simulateOneStep(){
         step++;
-        // Fornece espaço para o animal recém-nascido.
-        List<Animal> newAnimales = new ArrayList<Animal>();
+        // Fornece espaço para o novo actor .
+        List<Actor> newActors = new ArrayList<Actor>();
         // Deixe todos os animais agirem.
-        for(Iterator<Animal> ite = generator.getAnimalsList().iterator(); ite.hasNext();)
+        for(Iterator<Actor> ite = generator.getAnimalsList().iterator(); ite.hasNext();)
         {
-            Animal animal = ite.next();
-            animal.act(newAnimales);
-            if(! animal.isAlive())
+            Actor actor = ite.next();
+            actor.act(newActors);
+            if(! actor.isActive())
             {
                 ite.remove();
             }
         }
         
-        generator.getAnimalsList().addAll(newAnimales);
+        generator.getAnimalsList().addAll(newActors);
         
 
         view.showStatus(step, field);

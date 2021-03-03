@@ -11,13 +11,14 @@ import java.util.Random;
 public class PopulationGenerator{
     
     // A probabilidade de uma raposa ser criada em qualquer posição da grade.
-    private static final double FOX_CREATION_PROBABILITY = 0.02;
+    private static final double FOX_CREATION_PROBABILITY = 0.03;
     // A probabilidade de um coelho ser criado em qualquer posição da grade.
     private static final double RABBIT_CREATION_PROBABILITY = 0.08;  
     private static final double OWL_CREATION_PROBABILITY = 0.04;    
+    private static final double BURN_CREATION_PROBABILITY = 0.02;    
 
     // Listas de animais no campo. Listas separadas são mantidas para facilitar a iteração.
-    private List<Animal> animales;
+    private List<Actor> actors;
 
     // O estado atual do campo.
     private Field field;  
@@ -32,7 +33,7 @@ public class PopulationGenerator{
      * @param view 
      */
     public PopulationGenerator(Field field, SimulatorView view){
-        animales = new ArrayList<>();
+        actors = new ArrayList<>();
        this.field = field;
        this.view = view;
        
@@ -41,10 +42,10 @@ public class PopulationGenerator{
     }
      /**
       *
-      * @return A lista de animais
+      * @return A lista de atores
       */
-     public List<Animal> getAnimalsList(){
-        return this.animales;
+     public List<Actor> getAnimalsList(){
+        return this.actors;
     }
     
     /**
@@ -52,7 +53,7 @@ public class PopulationGenerator{
      * @return O número total de raposas e coelhos na lista.
      */
     public int getNumberOfAnimals(){
-       int i = animales.size();
+       int i = actors.size();
        return i;
     }   
     
@@ -93,7 +94,7 @@ public class PopulationGenerator{
     }
 
     /**
-     * Preencher o campo aleatoriamente com raposas e coelhos.
+     * Preencher o campo aleatoriamente com os atores
      */
     public void populate(){
         Random rand;
@@ -104,16 +105,20 @@ public class PopulationGenerator{
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Fox fox = new Fox(true, getField(), location);
-                    animales.add(fox);
+                    actors.add(fox);
                 }
                 else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Rabbit rabbit = new Rabbit(true, getField(), location);
-                    animales.add(rabbit);
+                    actors.add(rabbit);
                 }else if (rand.nextDouble() <= OWL_CREATION_PROBABILITY) {
                      Location location = new Location(row, col);
                      Owl owl = new Owl(true, getField(), location);
-                     animales.add(owl);
+                     actors.add(owl);
+                }else if (rand.nextDouble() <= BURN_CREATION_PROBABILITY) {
+                     Location location = new Location(row, col);
+                     Burn burn = new Burn(getField(), location);
+                     actors.add(burn);
                 }
                 // senão deixe o local vazio.
             }
@@ -121,14 +126,18 @@ public class PopulationGenerator{
     }
     
         /**
-         * Define as cores dos animais
-         * Coelhos são laranja
-         * Raposas são azuis
+         * Define as cores dos Atores:
+         * Coelhos são laranja,
+         * Raposas são azuis,
+         * Queimadas são vermelhas.
          */
         private void setColor(){
         this.view.setColor(Rabbit.class, Color.ORANGE);
         this.view.setColor(Fox.class, Color.BLUE);
-        this.view.setColor(Owl.class, Color.RED);
+        this.view.setColor(Owl.class, Color.DARK_GRAY);
+         this.view.setColor(Burn.class, Color.RED);
+
+        
         
     }
     

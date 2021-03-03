@@ -39,7 +39,9 @@ public class FieldStats{
         }
         for(Class key : counters.keySet()) {
             Counter info = counters.get(key);
-            buffer.append(info.getName());
+            String name = info.getName();
+            String[] resultado = name.split("\\.");
+            buffer.append(resultado[1]);
             buffer.append(": ");
             buffer.append(info.getCount());
             buffer.append(' ');

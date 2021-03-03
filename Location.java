@@ -5,6 +5,7 @@ public class Location
     // Posições de linha e coluna.
     private int row;
     private int col;
+    
 
     /**
      * Representa uma linha e coluna.
@@ -62,4 +63,8 @@ public class Location
     public int getCol(){
         return col;
     }
+
+    
+    
+    
 }

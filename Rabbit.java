@@ -8,7 +8,7 @@ import java.util.Random;
  * 
  * @author Gabriel
  */
-public class Rabbit extends Animal{
+public class Rabbit extends Actor{
 
     private static final int BREEDING_AGE = 5; //Idade que coelho começa procriar
     private static final int MAX_AGE = 50;// Idade maxima que a coelho vive
@@ -35,9 +35,9 @@ public class Rabbit extends Animal{
      * ou morrer de velhice.
      * @param newRabbits lista de coelhos
      */
-    public void act(List<Animal> newRabbits){
+    public void act(List<Actor> newRabbits){
         incrementAge();
-        if(isAlive()) {
+        if(isActive()) {
             giveBirth(newRabbits);            
             // Mova-se em direção a uma fonte de alimento, se encontrada.
             Location newLocation = field.freeAdjacentLocation(getLocation());
@@ -75,15 +75,15 @@ public class Rabbit extends Animal{
      * Responsavel pela geração de novos coelhos
      * @param newRabbits 
      */
-     private void giveBirth(List<Animal> newRabbits){
+     private void giveBirth(List<Actor> newRabbits){
          // Novas coelhos nascem em locais adjacentes.
         // Obtenha uma lista de locais livres adjacentes.
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Rabbit young = new Rabbit(false, field, loc);
-            newRabbits.add(young);
+                  Rabbit young = new Rabbit(false, field, loc);
+                  newRabbits.add(young);
         }
     }
     /**

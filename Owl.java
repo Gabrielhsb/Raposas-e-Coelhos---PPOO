@@ -9,13 +9,13 @@ import java.util.Random;
  *
  * @author Gabriel 
  */
-public class Owl extends Animal{
+public class Owl extends Actor{
     
     
     private static final int BREEDING_AGE = 7; //I dade que coruja começa procriar.
     private static final int MAX_AGE = 200; // Idade maxima que a coruja vive.
-    private static final double BREEDING_PROBABILITY = 0.04; // Probabilidade da coruja procriar.
-    private static final int MAX_LITTER_SIZE = 5; // Numero maximo de filhotes.
+    private static final double BREEDING_PROBABILITY = 0.8; // Probabilidade da coruja procriar.
+    private static final int MAX_LITTER_SIZE = 10; // Numero maximo de filhotes.
     private static final int RABBIT_FOOD_VALUE = 3; //Numero de passos que a coruja pode dar antes de se alimentar novamente.
     private static final Random rand = new Random(); // Gerador de numeros aleatorios compartilhados para controlar a repodução
     private int foodLevel; // Nivel de comida do coelho, aumenta ao comer coelhos.
@@ -44,10 +44,10 @@ public class Owl extends Animal{
     }
 
     @Override
-    public void act(List<Animal> newOwl) {
+    public void act(List<Actor> newOwl) {
         incrementAge();
         incrementeHunger();
-        if(isAlive()){
+        if(isActive()){
             giveBirth(newOwl);
             
             Location newLocation = findFood();
@@ -78,7 +78,7 @@ public class Owl extends Animal{
         }
     }
 
-    private void giveBirth(List<Animal> newOwl) {
+    private void giveBirth(List<Actor> newOwl) {
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
@@ -98,7 +98,7 @@ public class Owl extends Animal{
             Object animal = field.getObjectAt(where);
             if(animal instanceof Rabbit){
                 Rabbit rabbit = (Rabbit) animal;
-                if(rabbit.isAlive()){
+                if(rabbit.isActive()){
                     rabbit.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;
                     result = where;
