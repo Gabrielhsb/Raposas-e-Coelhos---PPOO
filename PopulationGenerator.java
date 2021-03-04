@@ -7,16 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
+/**
+ * Classe responsavel por gerar a população de atores na simulação.
+ * @author gabriel
+ */
 public class PopulationGenerator{
     
     // A probabilidade de uma raposa ser criada em qualquer posição da grade.
     private static final double FOX_CREATION_PROBABILITY = 0.07;
     // A probabilidade de um coelho ser criado em qualquer posição da grade.
     private static final double RABBIT_CREATION_PROBABILITY = 0.3;  
+      // A probabilidade de uma Coruja ser criado em qualquer posição da grade.
     private static final double OWL_CREATION_PROBABILITY = 0.08;    
+      // A probabilidade de uma queimada ser criado em qualquer posição da grade.
     private static final double BURN_CREATION_PROBABILITY = 0.02;    
-    private static final double FOXBANE_CREATION_PROBABILITY = 0.2;    
+      // A probabilidade de uma planta ser criado em qualquer posição da grade.
+    private static final double FOXBANE_CREATION_PROBABILITY = 0.3;    
 
     // Listas de animais no campo. Listas separadas são mantidas para facilitar a iteração.
     private List<Actor> actors;
@@ -24,12 +30,11 @@ public class PopulationGenerator{
     // O estado atual do campo.
     private Field field;  
     
-    
     // Uma visão gráfica da simulação
     private SimulatorView view;
 
     /**
-     * Contrutor padrão
+     * Contrutor padrão da classe.
      * @param field
      * @param view 
      */
@@ -42,7 +47,6 @@ public class PopulationGenerator{
         
     }
      /**
-      *
       * @return A lista de atores
       */
      public List<Actor> getAnimalsList(){
@@ -81,9 +85,7 @@ public class PopulationGenerator{
         }
         return allAnimals.size();
     }
-    
      
- 
         /**
       * Retorna o campo.
       *
@@ -134,7 +136,10 @@ public class PopulationGenerator{
          * Define as cores dos Atores:
          * Coelhos são laranja,
          * Raposas são azuis,
-         * Queimadas são vermelhas.
+         * Queimadas são vermelhas,
+         * Corujas são cinzas,
+         * Plantas são verdes,
+         * Lugares queimados são pretos.
          */
         private void setColor(){
         this.view.setColor(Rabbit.class, Color.ORANGE);
@@ -142,6 +147,7 @@ public class PopulationGenerator{
         this.view.setColor(Owl.class, Color.DARK_GRAY);
          this.view.setColor(Burn.class, Color.RED);
          this.view.setColor(FoxBane.class, Color.GREEN);
+         this.view.setColor(Burned.class, Color.BLACK);
 
         
         

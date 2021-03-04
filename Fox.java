@@ -1,9 +1,7 @@
 package Raposas_e_Coelhos_simulacao;
-
 import java.util.List;
 import java.util.Iterator;
 import java.util.Random;
-
 
 /**
  * Subclasse de actor representa uma raposa.
@@ -24,6 +22,8 @@ public class Fox extends Actor{
     /**
      * Ao criar uma raposa ela pode nascer com idade zero ou com uma idade aleatoria.
      * @param randomAge Se verdadeiro, a raposa terá idade e nível de fome aleatórios.
+     * @param field campo em que a raposa vai ocupar.
+     * @param location localização da planta no campo.
      */
     public Fox(boolean randomAge, Field field, Location location){
        super(location,field);
@@ -33,7 +33,6 @@ public class Fox extends Actor{
             foodLevel = rand.nextInt(FOOD_VALUE);
         }
     }
-    
     /**
      * Função responsavel pela forma em que a raposa se comporta,
      * na maioria das vezes: ela caça coelhos. 

@@ -13,9 +13,9 @@ public class Simulator
 {
       // Constantes que representam informações de configuração para a simulação.
      // A largura padrão da grade.
-    private static final int DEFAULT_WIDTH = 200;
+    private static final int DEFAULT_WIDTH = 100;
     // A profundidade padrão da grade.
-    private static final int DEFAULT_DEPTH = 200;
+    private static final int DEFAULT_DEPTH = 100;
 
     // A etapa atual da simulação.
     private int step;

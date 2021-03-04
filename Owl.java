@@ -6,27 +6,24 @@ import java.util.List;
 import java.util.Random;
 
 /**
- *
+ *Classe que represanta a coruja.
  * @author Gabriel 
  */
 public class Owl extends Actor{
-    
-    
     private static final int BREEDING_AGE = 10; //I dade que coruja começa procriar.
     private static final int MAX_AGE = 200; // Idade maxima que a coruja vive.
     private static final double BREEDING_PROBABILITY = 0.30; // Probabilidade da coruja procriar.
     private static final int MAX_LITTER_SIZE = 3; // Numero maximo de filhotes.
     private static final int RABBIT_FOOD_VALUE = 15; //Numero de passos que a coruja pode dar antes de se alimentar novamente.
     private static final Random rand = new Random(); // Gerador de numeros aleatorios compartilhados para controlar a repodução
-    private int foodLevel; // Nivel de comida do coelho, aumenta ao comer coelhos.
+    private int foodLevel; // Nivel de comida, aumenta ao comer coelhos ou frutinhas.
     private int age;
-    
-    
-    
     
     /**
      * Ao criar uma coruja ela pode nascer com idade zero ou com uma idade aleatoria.
      * @param randomAge Se verdadeiro, a coruja terá idade e nível de fome aleatórios.
+     * @param field campo onde a coruja vai ocupar.
+     * @param location localização no campo onde a coruja vai ficar.
      */
     
     public Owl(boolean randomAge, Field field, Location location) {
@@ -35,21 +32,24 @@ public class Owl extends Actor{
         if (randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
-            
         }
         else {
             age = 0;
             foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
         }
     }
-
+    /**
+     * Forma como a coruja se comporta,
+     * Normalmente ela procura novas comidas que pode ser coelho ou plantas
+     * e gera novas corujas.
+     * @param newOwl 
+     */
     @Override
     public void act(List<Actor> newOwl) {
         incrementAge();
         incrementeHunger();
         if(isActive()){
             giveBirth(newOwl);
-            
             Location newLocation = findFood();
             if(newLocation== null){
                 newLocation = field.freeAdjacentLocation(getLocation());
@@ -61,23 +61,29 @@ public class Owl extends Actor{
                 setDead();
             }
         }
-        
     }
-
+    /**
+     * Incrementa a idade da coruja.
+     */
     private void incrementAge() {
             age++;
             if(age > MAX_AGE) {
                 setDead();
             }
     }
-
+    /**
+     * Incrementa a fome da coruja.
+     */
     private void incrementeHunger() {
         foodLevel--;
         if(foodLevel <= 0) {
             setDead();
         }
     }
-
+    /**
+     * Gera novos filhotes de corujas.
+     * @param newOwl lista de corujas.
+     */
     private void giveBirth(List<Actor> newOwl) {
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
@@ -87,7 +93,12 @@ public class Owl extends Actor{
             newOwl.add(young);
         }
     }
-
+    
+    /**
+     * Responsavel por fazer a coruja buscar alimento,
+     * sendo coelho ou planta.
+     * @return  o alimento encontrado ou null se não tiver.
+     */
     private Location findFood() {
         List<Location> adjacent = field.adjacentLocations(getLocation());
         Iterator<Location> it = adjacent.iterator();
@@ -103,6 +114,13 @@ public class Owl extends Actor{
                     foodLevel = RABBIT_FOOD_VALUE;
                     result = where;
                 }
+            } else if(animal instanceof FoxBane){
+                FoxBane foxBane = (FoxBane) animal;
+                if(foxBane.isActive()){
+                    foxBane.setDead();
+                    foodLevel = RABBIT_FOOD_VALUE;
+                    result = where;
+                }
             }
             else{
                 result = null;
@@ -112,7 +130,11 @@ public class Owl extends Actor{
         return result;
     }
     
-    
+    /**
+     * Responsavel gerar um numero aleatorio de quantos filhos
+     * a coruja vai ter.
+     * @return numero de filhos.
+     */
     private int breed(){
         int births = 0;
         if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY){
@@ -121,6 +143,10 @@ public class Owl extends Actor{
         return births;
     }
 
+    /**
+     * Verifica se a coruja pode procriar.
+     * @return true ou false.
+     */
     private boolean canBreed() {
         return age >= BREEDING_AGE;    
     }

@@ -1,19 +1,24 @@
 package Raposas_e_Coelhos_simulacao;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-public class Field
-{
+/**
+ * Classe que representa um campo delimitado bidimensional.
+ * O campo é composto por um número fixo de locais, que são
+ * organizados em linhas e colunas.
+ * @author gabriel
+ */
+public class Field{
     private static final Random rand = new Random();
     
     //A profundidade e largura do campo.
     private int depth, width;
     // Armazenamento para os animais.
     private Object[][] field;
+
 
     /**
      * Representa um campo das dimensões fornecidas.
@@ -39,6 +44,7 @@ public class Field
     
     /**
      * Função responsavel por esvaziar uma localização do campo
+     * @param location
      */
     public void clear(Location location){
         field[location.getRow()][location.getCol()] = null;
@@ -116,7 +122,7 @@ public class Field
         List<Location> free = new LinkedList<Location>();
         List<Location> adjacent = adjacentLocations(location);
         for(Location next : adjacent) {
-            if(getObjectAt(next) == null) {
+            if(getObjectAt(next) == null || getObjectAt(next) instanceof Burned ) {
                 free.add(next);
             }
         }
@@ -127,13 +133,10 @@ public class Field
         List<Location> free = new LinkedList<Location>();
         List<Location> adjacent = adjacentLocations(location);
         for(Location next : adjacent) {
-        
-            if(!next.isBurned()) {
-                
                 if(getObjectAt(next) == null){
                      free.add(next);
                 }
-            }
+            
         }
         return free;
     }
@@ -196,4 +199,16 @@ public class Field
     public int getWidth(){
         return width;
     }
+
+/**
+ * Demarca que aquele local está queimado.
+ * @param location localização para demarcar.
+ */
+  public void setBurned(Location location){
+        Burned burned = new Burned();
+       place(burned, location);
+    }
+
+    
+    
 }

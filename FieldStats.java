@@ -1,8 +1,6 @@
 package Raposas_e_Coelhos_simulacao;
-
-
-
 import java.util.HashMap;
+
 
 /**
 * Esta classe coleta e fornece alguns dados estatísticos sobre o estado

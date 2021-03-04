@@ -1,28 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Raposas_e_Coelhos_simulacao;
-
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.awt.FlowLayout;
 
 /**
- *
+ *Classe que gera um menuzinho com botões para iniciar a execução.
  * @author Gabriel
  */
 public class Menu {
     private JFrame frame;
     private JButton nextStep;
     private JButton start;
-private Simulator simulator =  new Simulator();
+    private Simulator simulator =  new Simulator();
 
-    
     
     public Menu() {
         simulator.reset();
@@ -53,7 +43,7 @@ private Simulator simulator =  new Simulator();
     }
     
     private void createFrame(){
-        frame.setSize(300,80);
+        frame.setSize(250,80);
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          frame.setLayout(new FlowLayout());
          frame.add(start);

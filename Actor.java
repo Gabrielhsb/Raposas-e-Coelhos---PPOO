@@ -1,13 +1,10 @@
 
 package Raposas_e_Coelhos_simulacao;
-
-import Raposas_e_Coelhos_simulacao.Field;
-import Raposas_e_Coelhos_simulacao.Location;
 import java.util.List;
 
 
 /**
- * A superclasse utilizada para representar um animal
+ * A superclasse utilizada para representar um ator na simulação.
  * @author Gabriel
  */
 public abstract class Actor{
@@ -15,11 +12,10 @@ public abstract class Actor{
     private Location location;
     protected Field field;
 
-    
     /**
      * Contrutor padrão utilizado para inicializar os atributos.
-     * @param location localização onde o animal vai aparecer
-     * @param field ?
+     * @param location localização onde está o ator.
+     * @param field campo que o ator ocupa. 
      */
     public Actor(Location location, Field field) {
         this.active = true;
@@ -28,7 +24,7 @@ public abstract class Actor{
     }
 
     /** 
-     * Utilizado para ver se o animal está vivo.
+     * Utilizado para ver se o ator está vivo.
      * @return retorna true ou false.
      */
     public boolean isActive() {
@@ -36,7 +32,7 @@ public abstract class Actor{
     }
 
     /** 
-     * Utilizado para pegar a localização do animal.
+     * Utilizado para pegar a localização do ator.
      * @return retorna a localição.
      */
     public Location getLocation() {
@@ -44,7 +40,7 @@ public abstract class Actor{
     }
     
     /**
-     * Definine uma nova localização para o animal
+     * Definine uma nova localização para o ator
      * @param newlocation nova localização
      */
     public void setLocation(Location newlocation) {
@@ -57,7 +53,7 @@ public abstract class Actor{
     }
      
     /**
-     * Define a localização do animal.
+     * Define a localização do ator.
      * @param row A coordenada vertical do local (linha).
      * @param col A cordenada horizontal do local (coluna).
      */
@@ -75,8 +71,23 @@ public abstract class Actor{
     }
     
     /**
-     * Forma como cada animal vai agir.
-     * @param newActors ?
+     * Seta se o ator está ativo ou não.
+     * @param active true ou false
+     */
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+    /**
+     * 
+     * @return O field do ator.
+     */
+    public Field getField() {
+        return field;
+    }
+    
+    /**
+     * Forma como cada ator vai agir.
+     * @param newActors lista onde guardara os atores.
      */
      abstract public void act(List<Actor> newActors);
 

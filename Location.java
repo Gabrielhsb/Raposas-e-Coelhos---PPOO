@@ -1,18 +1,15 @@
 package Raposas_e_Coelhos_simulacao;
 
-public class Location
-{
+public class Location{
     // Posições de linha e coluna.
     private int row;
     private int col;
-    private boolean burned = false;
 
     /**
      * Representa uma linha e coluna.
      * @param row A linha.
      * @param col A coluna.
      */
-    
     public Location(int row, int col){
         this.row = row;
         this.col = col;
@@ -64,12 +61,6 @@ public class Location
         return col;
     }
 
-    public boolean isBurned() {
-        return burned;
-    }
 
-    public void setBurned() {
-        this.burned = true;
-    }
 
 }
