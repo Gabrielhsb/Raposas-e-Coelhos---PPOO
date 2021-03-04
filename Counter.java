@@ -5,6 +5,7 @@ import java.awt.Color;
  * Classe responsavel por armazenar uma contagem 
  * atual de um tipo de animal para auxiliar na contagem
  * @author Gabriel
+ * @author Lucas Bernardes
  */
 public class Counter{
     
@@ -37,14 +38,14 @@ public class Counter{
     }
 
     /**
-     * Aumente a contagem atual em um.
+     * Aumenta a contagem atual em um.
      */
     public void increment(){
         count++;
     }
     
     /**
-     * Redefina a contagem atual para zero.
+     * Redefine a contagem atual para zero.
      */
     public void reset(){
         count = 0;

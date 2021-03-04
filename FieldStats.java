@@ -3,11 +3,10 @@ import java.util.HashMap;
 
 
 /**
-* Esta classe coleta e fornece alguns dados estatísticos sobre o estado
- * de um campo. É flexível: criará e manterá um contador
- * para qualquer classe de objeto encontrada no campo.
- *
+* Classe coleta e fornece estatísticas sobre o estado de um campo. 
+ * É flexível: criará e manterá um contador para qualquer classe de objeto encontrada no campo.
  * @author Gabriel
+ * @author Lucas Bernardes
  */
 public class FieldStats{
     // Contadores para cada tipo de entidade (raposa, coelho, etc.) na simulação.
@@ -20,8 +19,8 @@ public class FieldStats{
      */
     public FieldStats()
     {
-        // Set up a collection for counters for each type of animal that
-        // we might find
+        // Configura uma coleção de contadores para cada tipo de animal que
+        // podemos encontrar
         counters = new HashMap<Class, Counter>();
         countsValid = true;
     }
@@ -48,7 +47,7 @@ public class FieldStats{
     }
     
     /**
-     Invalide o conjunto atual de estatísticas; reiniciar tudo a zero.
+     Invalida o conjunto atual de estatísticas, reinicia tudo para zero.
      */
     public void reset(){
         countsValid = false;
@@ -59,7 +58,7 @@ public class FieldStats{
     }
 
     /**
-     * Aumente a contagem para uma classe de animal.
+     * Aumenta a contagem para uma classe de animal.
      * @param animalClass A classe de animal a ser incrementada.
      */
     public void incrementCount(Class animalClass){
@@ -74,20 +73,20 @@ public class FieldStats{
     }
 
     /**
-     * Indique que uma contagem de animais foi concluída.
+     * Indica que uma contagem de animais foi concluída.
      */
     public void countFinished(){
         countsValid = true;
     }
 
     /**
-     * Determine se a simulação ainda é viável.
+     * Determina se a simulação ainda é viável.
      * Ou seja, deve continuar em execução.
      * @return true Se houver mais de uma espécie viva.
      */
     
     public boolean isViable(Field field){
-        // How many counts are non-zero.
+        // Quantas contagens são diferentes de zero.
         int nonZero = 0;
         if(!countsValid) {
             generateCounts(field);

@@ -10,6 +10,7 @@ import java.util.Random;
 /**
  * Classe responsavel por gerar a população de atores na simulação.
  * @author gabriel
+ * @author Lucas Bernardes
  */
 public class PopulationGenerator{
     
@@ -86,7 +87,7 @@ public class PopulationGenerator{
         return allAnimals.size();
     }
      
-        /**
+      /**
       * Retorna o campo.
       *
       * @return o campo
@@ -97,7 +98,7 @@ public class PopulationGenerator{
     }
 
     /**
-     * Preencher o campo aleatoriamente com os atores
+     * Preenche o campo aleatoriamente com os atores
      */
     public void populate(){
         Random rand;
@@ -133,13 +134,13 @@ public class PopulationGenerator{
     }
     
         /**
-         * Define as cores dos Atores:
-         * Coelhos são laranja,
-         * Raposas são azuis,
-         * Queimadas são vermelhas,
-         * Corujas são cinzas,
-         * Plantas são verdes,
-         * Lugares queimados são pretos.
+         * Define as cores para os Atores:
+         * Coelhos - laranja,
+         * Raposas - azul,
+         * Queimadas - vermelho,
+         * Corujas - cinza,
+         * Plantas - verde,
+         * Lugares queimados - preto.
          */
         private void setColor(){
         this.view.setColor(Rabbit.class, Color.ORANGE);

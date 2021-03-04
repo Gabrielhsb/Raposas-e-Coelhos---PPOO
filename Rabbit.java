@@ -6,8 +6,9 @@ import java.util.Random;
 
 
 /**
- * 
+ * Subclasse de actor representa um coelho.
  * @author Gabriel
+ * @author Lucas Bernardes
  */
 public class Rabbit extends Actor{
 

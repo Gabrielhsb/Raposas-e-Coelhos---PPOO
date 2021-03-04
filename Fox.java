@@ -6,6 +6,7 @@ import java.util.Random;
 /**
  * Subclasse de actor representa uma raposa.
  * @author Gabriel
+ * @author Lucas Bernardes
  */
 public class Fox extends Actor{
     // Estatisticas das raposas

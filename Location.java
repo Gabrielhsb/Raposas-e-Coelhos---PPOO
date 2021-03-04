@@ -1,5 +1,15 @@
 package Raposas_e_Coelhos_simulacao;
 
+/**
+ *  Trabalho final de Práticas de Programação Orientada a Objetos
+ * 
+ * @author Gabriel Henrique Silva Bernardo
+ * @author Lucas Floriano Bernardes de Castro
+ * @author Kleber Halley Sallum Guimarães
+ * @author Paulo Eduardo Tomaz de Biaso 
+ */
+
+
 public class Location{
     // Posições de linha e coluna.
     private int row;

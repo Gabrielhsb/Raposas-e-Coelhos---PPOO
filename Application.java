@@ -13,7 +13,7 @@ package Raposas_e_Coelhos_simulacao;
 public class Application{
      /** 
       * Classe responsavel por executar o programa.
-     * @param args the command line arguments
+     * @param args os argumentos da linha de comando
      */
     public static void main(String[] args){
         Menu m = new Menu();

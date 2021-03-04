@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.FlowLayout;
 
 /**
- *Classe que gera um menuzinho com botões para iniciar a execução.
+ *Classe que gera um Menu com botões para controlar a execução.
  * @author Gabriel
  */
 public class Menu {

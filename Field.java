@@ -10,6 +10,7 @@ import java.util.Random;
  * O campo é composto por um número fixo de locais, que são
  * organizados em linhas e colunas.
  * @author gabriel
+ * @author Lucas Bernardes
  */
 public class Field{
     private static final Random rand = new Random();

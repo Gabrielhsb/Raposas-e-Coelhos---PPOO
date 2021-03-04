@@ -8,9 +8,11 @@ import java.util.Random;
 /**
  *Classe que represanta a coruja.
  * @author Gabriel 
+ * @author Lucas Bernardes
  */
+
 public class Owl extends Actor{
-    private static final int BREEDING_AGE = 10; //I dade que coruja começa procriar.
+    private static final int BREEDING_AGE = 10; //Idade que coruja começa procriar.
     private static final int MAX_AGE = 200; // Idade maxima que a coruja vive.
     private static final double BREEDING_PROBABILITY = 0.30; // Probabilidade da coruja procriar.
     private static final int MAX_LITTER_SIZE = 3; // Numero maximo de filhotes.
@@ -40,8 +42,8 @@ public class Owl extends Actor{
     }
     /**
      * Forma como a coruja se comporta,
-     * Normalmente ela procura novas comidas que pode ser coelho ou plantas
-     * e gera novas corujas.
+     * Normalmente ela procura comida seja coelho ou plantas
+     * gera novas corujas.
      * @param newOwl 
      */
     @Override
@@ -95,7 +97,7 @@ public class Owl extends Actor{
     }
     
     /**
-     * Responsavel por fazer a coruja buscar alimento,
+     * Responsavel por fazer a coruja buscar comida,
      * sendo coelho ou planta.
      * @return  o alimento encontrado ou null se não tiver.
      */
